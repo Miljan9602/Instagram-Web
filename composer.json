@@ -1,0 +1,33 @@
+{
+  "name": "miljan9602/instagram-web",
+  "type": "library",
+  "description": "Library which will work with instagram web. It will have requests that does not require cookie. Link: http://instagram.com",
+  "keywords": ["php"],
+  "homepage": "https://github.com/FlockMgmt",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Miljan Rakita",
+      "email": "rakitamiljan@yahoo.com",
+      "homepage": "https://github.com/Miljan9602",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "InstagramWeb\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.6",
+    "ext-curl": "*",
+    "ext-mbstring": "*",
+    "ext-gd": "*",
+    "ext-exif": "*",
+    "ext-zlib": "*",
+    "ext-bcmath": "*",
+    "guzzlehttp/guzzle": "^6.3@dev",
+    "lazyjsonmapper/lazyjsonmapper": "dev-master"
+  }
+}
