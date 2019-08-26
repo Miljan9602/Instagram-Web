@@ -19,6 +19,7 @@ use LazyJsonMapper\LazyJsonMapper;
  * @method string getAddressJson()
  * @method string getProfilePicUrl()
  * @method EdgeLocationToMedia getEdgeLocationToMedia()
+ * @method EdgeLocationToTopPosts getEdgeLocationToTopPosts()
  *
  * @author Rakita Miljan <miljan@flocksocial.io>
  */
@@ -36,5 +37,6 @@ class Location extends LazyJsonMapper
         'address_json' => 'string',
         'profile_pic_url' => 'string',
         'edge_location_to_media' => 'EdgeLocationToMedia',
+        'edge_location_to_top_posts' => 'EdgeLocationToTopPosts'
     ];
 }

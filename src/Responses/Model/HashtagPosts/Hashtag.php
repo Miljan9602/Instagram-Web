@@ -16,7 +16,7 @@ use LazyJsonMapper\LazyJsonMapper;
  * @method bool isIsTopMediaOnly()
  * @method string getProfilePicUrl()
  * @method EdgeHashtagToMedia getEdgeHashtagToMedia()
- *
+ * @method EdgeHashtagToTopPosts getEdgeHashtagToTopPosts()
  *
  * @author Rakita Miljan <miljan@flocksocial.io>
  */
@@ -30,5 +30,6 @@ class Hashtag extends LazyJsonMapper
         'is_top_media_only' => 'bool',
         'profile_pic_url' => 'string',
         'edge_hashtag_to_media' => 'EdgeHashtagToMedia',
+        'edge_hashtag_to_top_posts' => 'EdgeHashtagToTopPosts',
     ];
 }

@@ -11,8 +11,7 @@ $client = (new \InstagramWeb\Client())
     ->setRetry(400, 5);
 
 
-/*
- * Hashtags.
+/* Hashtags.
 try{
 
     $after = null;
@@ -23,7 +22,12 @@ try{
         $hasMore = $hashtags->getPageInfo()->isHasNextPage(); // check if we have more.
         $after = $hashtags->getPageInfo()->getEndCursor(); // get next query.
 
-        // get all posts.
+        $topPosts = $result->getData()->getHashtag()->getEdgeHashtagToTopPosts()->getEdges();
+
+        foreach ($topPosts as $topPost) {
+            echo "Owner: ".$topPost->getNode()->getOwner()->getId().PHP_EOL;
+        }
+
         $posts =  $hashtags->getEdges();
 
         foreach ($posts as $post) {
@@ -64,7 +68,7 @@ try {
 }
 */
 
-/* Locations
+// Locations
 
 $after = null;
 try {
@@ -74,6 +78,12 @@ try {
         $posts = $result->getData()->getLocation()->getEdgeLocationToMedia();
         $hasMore = $posts->getPageInfo()->isHasNextPage();
         $after = $posts->getPageInfo()->getEndCursor();
+
+        $topPosts = $result->getData()->getLocation()->getEdgeLocationToTopPosts()->getEdges();
+
+        foreach ($topPosts as $topPost) {
+            echo "Post shortcode: ".$topPost->getNode()->getShortcode().PHP_EOL;
+        }
 
         $posts = $posts->getEdges();
 
@@ -86,4 +96,3 @@ try {
 }catch (\InstagramWeb\Exceptions\InstagramException $e) {
     echo "Bad reqeust: ".$e->getMessage();
 }
-*/

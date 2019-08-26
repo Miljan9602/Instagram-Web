@@ -35,6 +35,7 @@ try {
     echo "Bad reqeust: ".$e->getMessage();
 }
 
+/*
 try{
 
     $after = null;
@@ -54,3 +55,4 @@ try{
 }catch (\InstagramWeb\Exceptions\InstagramException $e) {
     echo "Bad reqeust: ".$e->getMessage();
 }
+*/

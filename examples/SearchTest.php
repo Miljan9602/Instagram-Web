@@ -15,12 +15,13 @@ $client = (new \InstagramWeb\Client())
     ->setRetry(400, 5);
 
 try{
-    $result = $client->search->search("San Francisco");
+    $result = $client->search->search("newyork");
 }catch (\InstagramWeb\Exceptions\InstagramException $e) {
     echo "Exception ".$e->getMessage();
     die();
 }
 
+/*
 $users = $result->getUsers();
 
 foreach ($users as $searchUser) {
@@ -91,3 +92,4 @@ $client->search->searchPlaces('San Francisco');
 $client->search->getUser('miljan_rakita');
 $client->search->getPlace('San Francisco State University');
 $client->search->getHashtag('sanfranciscofood');
+*/
