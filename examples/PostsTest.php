@@ -68,7 +68,7 @@ try {
 }
 */
 
-// Locations
+/* Locations
 
 $after = null;
 try {
@@ -95,4 +95,10 @@ try {
 
 }catch (\InstagramWeb\Exceptions\InstagramException $e) {
     echo "Bad reqeust: ".$e->getMessage();
-}
+}*/
+
+// Post information
+
+$result = $client->posts->getPostInformation('B0B_VboCvqu');
+
+print_r($result->getData()->getShortcodeMedia()->getOwner()->getUsername());

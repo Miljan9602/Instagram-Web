@@ -6,6 +6,7 @@ namespace InstagramWeb\Requests;
 use InstagramWeb\Responses\HashtagPostsResponse;
 use InstagramWeb\Responses\LocationPostsResponse;
 use InstagramWeb\Responses\PostCommentsResponse;
+use InstagramWeb\Responses\PostInformationResponse;
 use InstagramWeb\Responses\PostLikesResponse;
 use InstagramWeb\Responses\UserPostsResponse;
 
@@ -16,7 +17,6 @@ use InstagramWeb\Responses\UserPostsResponse;
  */
 class PostsRequest extends BaseRequest
 {
-
     /**
      * @param $hashtagName
      * @param null $after
@@ -132,5 +132,28 @@ class PostsRequest extends BaseRequest
             ->addParam('query_hash', $queryHash)
             ->addParam('variables', json_encode($variables))
             ->getResponse(new PostCommentsResponse());
+    }
+
+    /**
+     * Returns basic information about post.
+     *
+     * @param string $shortcode from post. It is used to identify post.
+     * @param string $queryHash
+     * @return \InstagramWeb\Responses\PostInformationResponse
+     */
+    public function getPostInformation($shortcode, $queryHash = "477b65a610463740ccdb83135b2014db") {
+
+        $variables = [
+            'shortcode' => $shortcode,
+            'child_comment_count' => 3,
+            'fetch_comment_count' => 40,
+            'parent_comment_count' => 24,
+            'has_threaded_comments' => true
+        ];
+
+        return $this->request("/graphql/query/")
+            ->addParam('query_hash', $queryHash)
+            ->addParam('variables', json_encode($variables))
+            ->getResponse(new PostInformationResponse());
     }
 }
