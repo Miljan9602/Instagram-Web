@@ -3,6 +3,7 @@
 namespace InstagramWeb;
 
 use InstagramWeb\Requests\PostsRequest;
+use InstagramWeb\Requests\ProfileRequest;
 use InstagramWeb\Requests\SearchRequest;
 
 /**
@@ -27,6 +28,12 @@ class Client
      * @var PostsRequest
      */
     public $posts;
+
+    /**
+     * All requests that are related to the profile.
+     * @var ProfileRequest
+     */
+    public $profile;
 
     /**
      * Sets proxy which will be send with every request with this client.
@@ -59,6 +66,7 @@ class Client
     private function init() {
         $this->search = new SearchRequest($this);
         $this->posts = new PostsRequest($this);
+        $this->profile = new ProfileRequest($this);
         $this->verifySSL = true;
         $this->proxy = null;
         $this->retry = [];

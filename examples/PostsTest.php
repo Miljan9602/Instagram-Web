@@ -97,8 +97,7 @@ try {
     echo "Bad reqeust: ".$e->getMessage();
 }*/
 
-// Post information
-
+/* Post information
 $result = $client->posts->getPostInformation('B0B_VboCvqu');
-
 print_r($result->getData()->getShortcodeMedia()->getOwner()->getUsername());
+*/

@@ -67,7 +67,7 @@ abstract class BaseRequest implements BaseRequestInterface
                     $e = new InstagramException('Instagram 500 status code error.', 500);
                     break;
                 default:
-                    $e = new EmptyResponseException('No response from server. Either a connection or configuration error.');
+                    $e = new EmptyResponseException('No response from server. Either a connection or configuration error.', $e->getCode());
             }
 
             throw $e;
@@ -156,18 +156,23 @@ abstract class BaseRequest implements BaseRequestInterface
      */
     protected function retryDecider($array) {
 
-        return function ($retries, \GuzzleHttp\Psr7\Request $request, Response $response = null, RequestException $exception = null) use ($array) {
+        $defaultRetry = 5;
 
-            if (!$response && $retries < 2) {
+        return function ($retries, \GuzzleHttp\Psr7\Request $request, Response $response = null, RequestException $exception = null) use ($array, $defaultRetry) {
+
+            try{
+                $json = json_decode($response->getBody()->getContents(), true);
+                $response->getBody()->seek(0);
+
+                if (!is_array($json)) {
+                    return true;
+                }
+            }catch (\Exception $exception) {
                 return true;
             }
 
-            if (!$response) {
-                return false;
-            }
-
-            // If we don't have status code and retri is greater than 2, return false.
-            if (!$response->getStatusCode() && $retries >= 2) {
+            // If we don't have status code and retri is greater than defaultRetry., return false.
+            if (!$response->getStatusCode() && $retries >= $defaultRetry) {
                 return false;
             }
 
