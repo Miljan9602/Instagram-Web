@@ -156,11 +156,21 @@ abstract class BaseRequest implements BaseRequestInterface
      */
     protected function retryDecider($array) {
 
-        $defaultRetry = 5;
+        $defaultRetry = 10;
 
         return function ($retries, \GuzzleHttp\Psr7\Request $request, Response $response = null, RequestException $exception = null) use ($array, $defaultRetry) {
 
+            // We will never retry more than 10 times.
+            if ($retries >= $defaultRetry) {
+                return false;
+            }
+
             try{
+
+                if (!$response || !$response->getBody()) {
+                     return true;
+                }
+
                 $json = json_decode($response->getBody()->getContents(), true);
                 $response->getBody()->seek(0);
 
@@ -171,8 +181,8 @@ abstract class BaseRequest implements BaseRequestInterface
                 return true;
             }
 
-            // If we don't have status code and retri is greater than defaultRetry., return false.
-            if (!$response->getStatusCode() && $retries >= $defaultRetry) {
+            // If we don't have status code and retry is greater than defaultRetry., return false.
+            if (!$response->getStatusCode()) {
                 return false;
             }
 
