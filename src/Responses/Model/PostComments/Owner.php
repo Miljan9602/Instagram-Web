@@ -10,7 +10,7 @@ use LazyJsonMapper\LazyJsonMapper;
  *
  * @method string getId()
  * @method bool isIsVerified()
- * @method string isProfilePicUrl()
+ * @method string getProfilePicUrl()
  * @method string getUsername()
  *
  * @author Rakita Miljan <miljan@flocksocial.io>
